@@ -1,0 +1,38 @@
+[project]
+name = "prometheus-script-wrapper"
+version = "0.1.0"
+description = "A script wrapper that exports Prometheus metrics via textfile collector"
+authors = [{ name = "Dustin Frisch", email = "fooker@lab.sh" }]
+readme = "README.md"
+license = { text = "MIT" }
+
+requires-python = ">=3.9"
+dependencies = [
+    "prometheus-client",
+    "click"
+]
+
+[project.scripts]
+promwrap = "prometheus_script_wrapper:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.mypy]
+disallow_untyped_defs = true
+check_untyped_defs = true
+strict = true
+
+[tool.uv]
+dev-dependencies = [
+    "pytest",
+    "ruff",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 140

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "config:best-practices"
+  ],
+  "nix": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "description": "Automerge everything",
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "automerge": true
+    },
+    {
+      "description": "Limit noisy nixpkgs",
+      "matchDepNames": [
+        "nixpkgs",
+        "nixpkgs-*"
+      ],
+      "schedule": [ "* 3 * * *" ],
+      "automergeSchedule": [ "* 4 * * *" ]
+    }
+  ]
+}

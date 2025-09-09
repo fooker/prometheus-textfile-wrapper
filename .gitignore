@@ -1,0 +1,8 @@
+/result
+/.envrc
+/.direnv
+/.idea
+
+__pycache__/
+*.py[codz]
+*$py.class
