@@ -62,11 +62,11 @@ All metrics can include optional labels that are specified with the `--label` fl
 
 ### Core Metrics
 
-| Metric | Type | Description |
-|--------|------|-------------|
-| `{prefix}exit_code` | Gauge | Exit code of the script. 0 typically indicates success, non-zero values indicate errors |
-| `{prefix}runtime_seconds` | Gauge | Total execution time of the script in seconds (with millisecond precision) |
-| `{prefix}success_timestamp_seconds` | Gauge | Unix timestamp (in seconds) when the script completed successfully. Only exported when the exit code is 0. Useful for monitoring when a script last ran successfully. |
+| Metric                               | Type  | Description                                                                                                                                                           |
+|--------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `{prefix}_exit_code`                 | Gauge | Exit code of the script. 0 typically indicates success, non-zero values indicate errors                                                                               |
+| `{prefix}_runtime_seconds`           | Gauge | Total execution time of the script in seconds (with millisecond precision)                                                                                            |
+| `{prefix}_success_timestamp_seconds` | Gauge | Unix timestamp (in seconds) when the script completed successfully. Only exported when the exit code is 0. Useful for monitoring when a script last ran successfully. |
 
 ### Custom Metrics
 
