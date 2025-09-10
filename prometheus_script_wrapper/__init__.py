@@ -82,6 +82,10 @@ def main(prefix: str, output: Path, labels: List[Tuple[str, str]], script: List[
     exit_code_metric.add_sample(exit_code_metric.name, value=exit_code, labels=labels)
     registry.add(exit_code_metric)
 
+    success_metric = Metric(name=f"{prefix}_success", documentation="Whether the wrapped script succeeded.", typ="gauge")
+    success_metric.add_sample(success_metric.name, value=int(exit_code == 0), labels=labels)
+    registry.add(success_metric)
+
     runtime_metric = Metric(name=f"{prefix}_runtime_seconds", documentation="Runtime duration of the script in seconds", typ="gauge")
     runtime_metric.add_sample(runtime_metric.name, value=runtime, labels=labels)
     registry.add(runtime_metric)

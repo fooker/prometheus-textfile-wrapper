@@ -19,6 +19,7 @@ def test_success(tmp_path):
     with (tmp_path / "out.prom").open("r") as f:
         content = f.read()
         assert "test_exit_code 0" in content
+        assert "test_success 1" in content
         assert "test_runtime_seconds" in content
         assert "test_success_timestamp_seconds" in content
 
@@ -35,6 +36,7 @@ def test_failure(tmp_path):
     with (tmp_path / "out.prom").open("r") as f:
         content = f.read()
         assert "test_exit_code 1" in content
+        assert "test_success 0" in content
         assert "test_runtime_seconds" in content
         assert "test_success_timestamp_seconds" not in content  # Should not be present for failures
 
@@ -60,6 +62,7 @@ def test_exit_code(tmp_path):
     with (tmp_path / "out.prom").open("r") as f:
         content = f.read()
         assert "test_exit_code 42" in content
+        assert "test_success 0" in content
 
 
 def test_custom_metrics(tmp_path):
@@ -89,7 +92,6 @@ def test_custom_metrics(tmp_path):
     assert os.path.exists(tmp_path / "out.prom")
     with (tmp_path / "out.prom").open("r") as f:
         content = f.read()
-        assert "test_exit_code" in content
         assert "test_runtime_seconds" in content
         assert "test_script_test_count_total 42" in content
         assert 'test_script_test_gauge{mylabel="test"} 23' in content
@@ -140,6 +142,7 @@ def test_extra_labels(tmp_path):
     with (tmp_path / "out.prom").open("r") as f:
         content = f.read()
         assert 'test_exit_code{x="one",y="two"}' in content
+        assert 'test_success{x="one",y="two"}' in content
         assert 'test_runtime_seconds{x="one",y="two"}' in content
         assert 'test_script_test_count_total{x="one",y="two"} 42' in content
         assert 'test_script_test_gauge{mylabel="test",x="one",y="two"} 23' in content
@@ -170,6 +173,4 @@ def test_argument_passing(tmp_path):
     assert os.path.exists(tmp_path / "out.prom")
     with (tmp_path / "out.prom").open("r") as f:
         content = f.read()
-        assert "test_exit_code" in content
-        assert "test_runtime_seconds" in content
         assert 'test_script_test_count_total{test="--extra"} 1337' in content
