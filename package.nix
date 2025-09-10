@@ -1,13 +1,10 @@
 {
   buildPythonApplication,
   hatchling,
-  uvicorn,
-  fastapi,
-  pydantic,
-  httpx,
+  click,
   prometheus-client,
   pytestCheckHook,
-  testcontainers,
+  bash,
   ...
 }:
 
@@ -20,14 +17,16 @@ buildPythonApplication {
   pyproject = true;
   build-system = [ hatchling ];
 
-  dependencies =
-    [
-      prometheus-client
-    ];
+  # Required for test execution
+  nativeBuildInputs = [ bash ];
+
+  dependencies = [
+    click
+    prometheus-client
+  ];
 
   pythonImportsCheck = [ "prometheus_script_wrapper" ];
 
-  # Requires running docker instance for testcontianers
   doCheck = true;
 
   nativeCheckInputs = [
