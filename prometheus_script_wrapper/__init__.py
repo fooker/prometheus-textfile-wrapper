@@ -62,7 +62,6 @@ def main(prefix: str, output: Path, labels: List[Tuple[str, str]], script: List[
                     value=sample.value,
                     timestamp=sample.timestamp,
                     exemplar=sample.exemplar,
-                    native_histogram=sample.native_histogram,
                 )
 
             registry.add(metric_wrapped)
