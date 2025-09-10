@@ -101,6 +101,7 @@ def main(prefix: str, output: Path, labels: List[Tuple[str, str]], script: List[
     # Move the output file to its final destination and ensure temporary is deleted
     try:
         os.rename(output_tmp.name, output)
+        os.chmod(output, 0o644)
     except IOError:
         try:
             os.unlink(output_tmp.name)
